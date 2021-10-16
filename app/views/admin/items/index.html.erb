@@ -1,0 +1,61 @@
+<% provide(:title, "商品一覧") %>
+
+<br><br>
+<center>
+
+  <div class="col-xs-10 col-xs-offset-1">
+      <h3>商品一覧</h3>
+  
+  <div class="text-right">
+    <%= link_to new_admin_item_path, data: {"turbolinks" => false}, class: "btn btn-lg pull-right" do %>
+      <i class="fas fa-plus"></i>
+    <% end %>
+  </div>
+    
+<br>
+    
+  <table class="table">
+    <thead>
+      <tr class="info bg-light">
+        <th class="text-center">商品ID</th>
+        <th class="text-center">商品名</th>
+        <th class="text-center">税抜価格</th>
+        <th class="text-center">ジャンル</th>
+        <th class="text-center">ステータス</th>
+      </tr>
+    </thead>
+      
+    <tbody>
+			<% @items.each do |item| %>
+        <tr>
+          <td class="info col-xs-1 text-center">
+            <%= item.id %>
+          </td>
+          <td class="text-center">
+            <%= link_to admin_item_path(item), class: "btn-light" do %>
+              <%= item.name %>
+            <% end %>
+          </td>
+          <td class="text-center col-xs-1">
+            ¥<%= item.price.to_s(:delimited) %>
+          </td>
+          <td class="text-center col-xs-3">
+            <%= item.genre.name %>
+          </td>
+          <td class="text-center col-xs-2">
+            <% if item.is_active == true %>
+      				<p>販売中</p>
+      			<% elsif item.is_active == false %>
+      				<p>販売停止中</p>
+      			<% end %>
+          </td>
+        </tr>
+      <% end %>
+      <%= paginate(@items) %>
+    </tbody>
+  </table>
+    
+  </div>
+
+</center>
+<br><br>

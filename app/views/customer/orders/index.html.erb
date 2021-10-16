@@ -1,0 +1,66 @@
+<% provide(:title, "注文履歴一覧") %>
+
+<br><br>
+<center>
+  
+  <div class="col-xs-12">
+    
+    <strong class="information-link"><h3>注文履歴一覧</h3></strong>
+    
+      <% if @orders.present? %>
+      
+        <table class="table table-hover table-bordered">
+          
+          <thead>
+            <tr class="info">
+              <th><i class="fas fa-calendar-day"></i>注文日</th>
+              <th>配送先</th>
+              <th>注文商品</th>
+              <th>支払金額</th>
+              <th>ステータス</th>
+              <th>注文詳細</th>
+            </tr>
+          </thead>
+          
+          <tbody>
+            <% @orders.each do |order| %>
+              <tr>
+                <td>
+    		          <%= order.created_at.strftime('%Y/%m/%d') %>
+    		        </td>
+    		        <td class="text-left">
+    		          <%= order.postal_code %><br>
+    		          <%= order.address %><br>
+    		          <%= order.name %>
+    		        </td>
+    		        <td>
+    		          <% order.order_details.each do |order_detail| %>
+    		          	<%= order_detail.item.name %><br>
+    		          <% end %>
+    		        </td>
+    		        <td class="text-right">
+    		          <%= order.total_price %>円
+    		        </td>
+    		        <td>
+    		          <%= order.status %>
+    		        </td>
+         	      <td>
+       	          <%= link_to "注文詳細", customers_order_path(order), class: "glyphicon glyphicon-zoom-in btn btn-dark" %>
+       	        </td>
+              </tr>
+            <% end %>
+          </tbody>
+          
+        </table>
+        
+      <% else %>
+        <p>注文履歴がありません。</p>
+      <% end %>
+    </div>
+
+    <div class="col-xs-12">
+      <%= link_to "戻る", customers_path, class: "glyphicon glyphicon-home btn btn-dark" %>
+    </div>
+    
+</center>
+<br><br>

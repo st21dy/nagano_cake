@@ -1,0 +1,65 @@
+<% provide(:title, "登録情報編集") %>
+
+<br><br>
+<center>
+
+  <div class="col-xs-12">
+
+    <h3><strong>登録情報編集</strong></h3>
+    <br>
+
+    <%= form_with(model:@customer, url:customer_path, local: true ,method: :put) do |f| %>
+      <%= render "layouts/error_messages", resource: @customer %>
+
+      <div>
+        <div class="col-xs-12">
+          <%= f.label :"氏名", class: "col-sm-3 control-label" %>
+          <br>
+          <%= f.text_field :last_name, class: "last_name col-sm-3 form-control-static name" %>
+          <%= f.text_field :first_name, class: "first_name col-sm-3 form-control-static name" %>
+        </div>
+        <div class="col-xs-12">
+          <%= f.label :"フリガナ", class: "col-sm-3 control-label" %>
+          <br>
+          <%= f.text_field :kana_last_name, class: "kana_last_name col-sm-3 form-control-static name" %>
+          <%= f.text_field :kana_first_name, class: "kana_first_name col-sm-3 form-control-static name" %>
+        </div>
+        <div class="col-xs-12">
+          <%= f.label :"メールアドレス", class: "col-sm-3 control-label" %>
+          <br>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-sm-6 form-control-static" %>
+        </div>
+        <div class="col-xs-12">
+          <%= f.label :"郵便番号", class: "col-sm-3 control-label" %>
+          <br>
+          <%= f.text_field :postal_code, class: "col-sm-2 form-control-static" %>
+        </div>
+        <div class="col-xs-12">
+          <%= f.label :"住所", class: "col-sm-3 control-label" %>
+          <br>
+          <%= f.text_field :residence, class: "col-sm-9 form-control-static" %>
+        </div>
+        <div class="col-xs-12">
+          <%= f.label :"電話番号(ハイフンなし)", class: "col-sm-3 control-label" %>
+          <br>
+          <%= f.text_field :telephone_number, class: "col-sm-2 form-control-static" %>
+        </div>
+      </div>
+      
+      <br>
+
+      <div class="actions col-xs-10 col-xs-offset-2">
+        <%= f.submit "編集内容を保存する", class: "btn btn-dark save col-xs-6" %>
+        <%= link_to '退会する', unsubscribe_customers_path, class: "glyphicon glyphicon-tint btn btn-danger"%>
+      </div>
+    <% end %>
+    
+    <br>
+    
+    <div class="col-xs-12">
+      <%= link_to "戻る", customers_path, class: "glyphicon glyphicon-home btn btn-dark" %>
+    </div>
+  </div>
+
+</center>
+<br><br>

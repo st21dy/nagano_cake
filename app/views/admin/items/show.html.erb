@@ -1,0 +1,55 @@
+<% provide(:title, "商品詳細") %>
+
+<br><br>
+<center>
+
+<div>
+
+    <h3>商品詳細</h3>
+    <br>
+    
+      <div>
+        <%= attachment_image_tag(@item, :image, size: "380x300", fallback: "no_image.jpg") %>
+      </div>
+
+      <br>
+
+      	 <table class="table-center">
+          <tbody>
+            <tr>
+              <td>商品名</td>
+              <td><%= @item.name %></td>
+            </tr>
+            <tr>
+              <td>商品説明</td>
+              <td><%= @item.introduction %></td>
+            </tr>
+            <tr>
+              <td>ジャンル</td>
+              <td><%= @item.genre.name %></td>
+            </tr>
+            <tr>
+              <td>税込価格(税抜価格)</td>
+              <td><%= (@item.price * 1.1).floor %> 円</td>
+            </tr>
+            <tr>
+              <td>販売ステータス</td>
+              <td>
+              <% if @item.is_active == true %>
+							　<i class="fas fa-bullseye red"></i>販売中
+							<% elsif @item.is_active == false %>
+							　<i class="fas fa-bullseye blue"></i>販売停止中
+							<% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="text-right">
+          <%= link_to "編集", edit_admin_item_path(@item), data: {"turbolinks" => false}, class: "btn btn-dark" %>
+        </div>
+
+</div>
+
+</center>
+<br><br>

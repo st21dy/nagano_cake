@@ -1,0 +1,113 @@
+<header>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+    
+    <br><br>
+  
+    <div class="nav navbar-nav navbar-left title">
+      <% if admin_signed_in? %>
+      <%= link_to "NaganoCAKE", admin_top_path, class: "fas fa-birthday-cake" %>
+      <% else %>
+      <%= link_to "NaganoCAKE", root_path, class: "fas fa-birthday-cake" %>
+      <% end %>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+        <% if customer_signed_in? %>
+
+          <!--カスタマーがログインしている時 -->
+          <li class="header-name">
+            ようこそ、<%= full_name(current_customer) %>さん！
+          </li>
+          <li style="font-family: HiraMinPro-W6; color: #000000;">|</li>
+          <li>
+            <%= link_to "マイページ", customers_path(current_customer), style: "font-family: HiraMinPro-W6; color: #000000;" %>
+          </li>
+          <li style="font-family: HiraMinPro-W6; color: #000000;">|</li>
+          <li>
+            <%= link_to "商品一覧", items_path, style: "font-family: HiraMinPro-W6; color: #000000;" %>
+          </li>
+          <li style="font-family: HiraMinPro-W6; color: #000000;">|</li>
+          <li class="dropdown">
+            <%= link_to "#", class: "header_btn dropdown-toggle glyphicon glyphicon-th-list",
+             'data-toggle': :dropdown do %>ジャンル検索<span class="caret"></span>
+            <% end %>
+            <ul class="dropdown-menu">
+              <% Genre.all.each do |genre| %>
+                <% if genre.is_valid == true %>
+			            <li class="genre_dropdown">
+                    <%= link_to admin_genre_path(genre), method: :get do %>
+                      <%= genre.name %>
+                    <% end %>
+                  </li>
+                <% end %>
+              <% end %>
+		        </ul>
+          </li>
+          <li style="font-family: HiraMinPro-W6; color: #000000;">|</li>
+          <li>
+            <%= link_to customers_cart_items_path, data: {"turbolinks" => false}, style: "font-family: HiraMinPro-W6; color: #000000;" do %>
+            カート(<%= current_customer.cart_items.count %>個)
+            <% end %>
+          </li>
+          <li style="font-family: HiraMinPro-W6; color: #000000;">|</li>
+          <li>
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, style: "font-family: HiraMinPro-W6; color: #000000;" %>
+          </li>
+
+        <% elsif admin_signed_in? %>
+
+          <!-- 管理者がログインしている時 -->
+          <li>
+            <%= link_to "商品一覧", admin_items_path, style: "font-family: HiraMinPro-W6; color: #000000;" %>
+          </li>
+          <li style="font-family: HiraMinPro-W6; color: #000000;">|</li>
+          <li>
+            <%= link_to "会員一覧", admin_customers_path, style: "font-family: HiraMinPro-W6; color: #000000;"  %>
+          </li>
+          <li style="font-family: HiraMinPro-W6; color: #000000;">|</li>
+          <li>
+            <%= link_to "注文履歴一覧", admin_orders_path, style: "font-family: HiraMinPro-W6; color: #000000;" %>
+          </li>
+          <li style="font-family: HiraMinPro-W6; color: #000000;">|</li>
+          <li>
+            <%= link_to "ジャンル一覧", admin_genres_path, style: "font-family: HiraMinPro-W6; color: #000000;" %>
+          </li>
+          <li style="font-family: HiraMinPro-W6; color: #000000;">|</li>
+          <li>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, style: "font-family: HiraMinPro-W6; color: #000000;" %>
+          </li>
+          
+          <li>
+          <%= render "layouts/search" %>
+          </li>
+        <% else %>
+
+          <!-- ログインしていない時 -->
+          
+          <li>
+            <%= link_to "About", about_path, style: "font-family: HiraMinPro-W6; color: #000000;" %>
+          </li>
+          <li style="font-family: HiraMinPro-W6; color: #000000;">|</li>
+          <li>
+              <%= link_to "商品一覧", items_path, style: "font-family: HiraMinPro-W6; color: #000000;" %>
+          </li>
+          <li style="font-family: HiraMinPro-W6; color: #000000;">|</li>
+          <li>
+             <%= link_to "新規登録", new_customer_registration_path, data: {"turbolinks" => false}, style: "font-family: HiraMinPro-W6; color: #000000;" %>
+          </li>
+          <li style="font-family: HiraMinPro-W6; color: #000000;">|</li>
+          <li>
+              <%= link_to "ログイン", new_customer_session_path, style: "font-family: HiraMinPro-W6; color: #000000;" %>
+          </li>
+          
+
+        <% end %>
+      </ul>
+    </div>
+  
+  <br><br>
+  
+  </nav>
+
+</header>

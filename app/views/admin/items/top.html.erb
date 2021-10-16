@@ -1,0 +1,18 @@
+<% provide(:title, "トップ") %>
+
+<br><br>
+<center>
+
+	  <div class="col-xs-12">
+		  <h3 class="head-line title_h2 text-center">管理者画面</h3>
+		  <h1 class="order-count">本日の注文件数
+			  <span>
+				  <%= link_to today_order_index_admin_orders_path, class: "btn-link" do %> 
+				  <%= @orders.count %>件
+				  <% end %>
+			  </span>
+		  </>
+		</div>
+
+</center>
+<br><br>

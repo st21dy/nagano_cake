@@ -1,0 +1,49 @@
+<% provide(:title, "#{@genre.name}一覧") %>
+
+<br><br>
+<center>
+
+  	<div class="col-md-8 offset-md-1 bg-light">
+
+      <h3 class="product-headlinehead-line title_h2 text-center"><%= @genre.name %>一覧</h3>
+      </span>
+      <br>
+      
+        <div class="col-xs-3">
+          <%= render "layouts/genre_search", items: @items %>
+        </div>
+      
+        <div class="col-xs-9">
+          <div class="clearfix">
+            <% @genres.first(6).each do |item| %>
+              
+              <% if item.genre.is_valid == true %>
+                <div class="product-container">
+
+                  <%= link_to item_path(item.id), class: "btn-link", :style=>"color:#0099FF;" do %>
+                    <div id="img_field" class="product">
+                      <%= attachment_image_tag(item, :image, size: "180x130", fallback: "no_image.jpg") %>
+                    </div>
+                    <p class="products-name">
+                      <%= item.name %>
+                    </p>
+                  <% end %>
+                  <% if item.is_active == true %>
+                    <p>¥<%= item.price.to_s(:delimited) %></p>
+                  <% elsif item.is_active == false %>
+                    <p class="soldout">売り切れ中</p>
+                  <% end %>
+                </div>
+              <% end %>
+              
+            <% end %>
+          </div>
+        
+          <div class="text-center"><%= paginate(@genres) %></div>
+        </div>
+      
+      
+    </div>
+
+</center>
+<br><br>

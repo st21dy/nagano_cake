@@ -1,0 +1,80 @@
+<% provide(:title, "会員情報編集") %>
+
+<br><br>
+<center>
+
+<%= render "layouts/error_messages", resource: @customer %>
+
+<h2><%= full_name(@customer) %>さんの会員情報編集</h2>
+<br>
+
+<%= form_with(model: @customer, url:admin_customer_path, local: true ,method: :patch) do |f| %>
+
+<table class="table">
+  <tr>
+    <th class="col-xs-2 bg-light"><center><%= f.label :"会員ID" %></center></th>
+    <td class="col-xs-10"><%= f.label :"#{@customer.id}", class:"form-control" %></td>
+  </tr>
+  
+  <tr>
+    <th class="col-xs-2 bg-light"><center><%= f.label :"氏名" %></center></th>
+    <td>
+      <%= f.text_field :last_name, class: "form-control" %><br>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </td>
+  </tr>
+  
+  <tr>
+    <th class="col-xs-2 bg-light"><center><%= f.label :"フリガナ" %></center></th>
+    <td>
+      <%= f.text_field :kana_last_name, class:"form-control" %><br>
+      <%= f.text_field :kana_first_name, class:"form-control" %>
+    </td>
+  </tr>
+
+  <tr>
+    <th class="col-xs-2 bg-light"><center><%= f.label :"郵便番号" %></center></th>
+    <td><%= f.text_field :postal_code, class:"form-control" %></td>
+  </tr>
+
+  <tr>
+    <th class="col-xs-2 bg-light"><center><%= f.label :"住所" %></center></th>
+    <td><%= f.text_field :residence, class:"form-control" %></td>
+  </tr>
+
+  <tr>
+    <th class="col-xs-2 bg-light"><center><%= f.label :"電話番号" %></center></th>
+    <td><%= f.text_field :telephone_number, class:"form-control" %></td>
+  </tr>
+  
+  <tr>
+    <th class="col-xs-2 bg-light"><center><%= f.label :"メールアドレス" %></center></th>
+    <td><%= f.text_field :email , class:"form-control"%></td>
+  </tr>
+  
+  <tr>
+    <th class="col-xs-2 bg-light"><center><%= f.label :"会員ステータス" %></center></th>
+    <td>
+      <%= f.radio_button :is_deleted, true %>
+      <%= f.label :is_deleted, "退会済", {value: :true, style: "display: inline-block;"} %>
+    　<%= f.radio_button :is_deleted, false %>
+    　<%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
+    </td>
+  </tr>
+
+</table>
+
+  <div class="actions  col-xs-9 col-xs-offset-4">
+    <%= f.submit '変更を保存する' ,class: "btn btn-dark" %>
+  </div>
+  
+<% end %>
+
+<br>
+
+  <div class="col-xs-12">
+    <%= link_to "戻る", admin_customer_path, class: "btn btn-dark" %>
+  </div>
+
+</center>
+<br><br>

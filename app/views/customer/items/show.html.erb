@@ -1,0 +1,50 @@
+<% provide(:title, "商品詳細") %>
+
+<br><br>
+
+<div class="row">
+  
+    <div class="col-md-3">
+    <!-- ジャンルのサイドバーを表示 -->
+  		<%= render "customer/items/sidebar", genres: @genres %>
+    </div>
+  
+    
+    <div class="show-box">
+      
+      <div class="show-img">
+        <%= attachment_image_tag(@item, :image, size: "340x300", fallback: "no_image.jpg" ) %>
+      </div>
+
+    
+      <div class="info-box">
+        <div class="field product-name">
+          <h3><%= @item.name %></h3>
+        </div>
+        <div class="field">
+          <h6><%= @item.introduction %></h6>
+        </div>
+        <div class="field product-price">
+          <h3>¥ <%= (@item.price * 1.1).floor %>
+              <span class="tax">(税込)</span>
+          </h3>
+        </div>
+      
+        <% if @item.is_active == true %>
+          <% if @item.genre.is_valid == true %>
+            <%= form_for(@cart_item , url: customers_cart_items_path, method: :post) do |f| %>
+              <%= f.hidden_field :item_id, value: @item.id %>
+              <%= f.select :amount, options_for_select((1..10).to_a), include_blank: "個数選択" %>
+              <%= f.submit "カートに入れる", class: "glyphicon glyphicon-shopping-cart btn btn-dark" %>
+            <% end %>
+          <% else %>
+            <h3>売り切れ中</h3>
+          <% end %>
+        <% elsif @item.is_active == false %>
+          <h3>売り切れ中</h3>
+        <% end %>
+      </div>
+    </div>
+</div>
+
+<br><br>

@@ -1,0 +1,28 @@
+<div class="genre_search">
+  <table class="table table-bordered">
+    
+    <thead>
+      <tr>
+        <th class="h4 info">ジャンル検索</th>
+      </tr>
+    </thead>
+      
+      <tbody>
+      <% items.each do |item| %>
+        <% if item.genre.is_valid == true %>
+          <tr>
+            <td>
+              <%= link_to admin_genre_path(item.genre.id), method: :get do %>
+                <%= item.genre.name %>
+              <% end %>
+            </td>
+          </tr>
+        <% else %>
+        <% end %>
+      <% end %>
+    </tbody>
+    
+  </table>
+  
+  <div class="text-center"><%= paginate(items) %></div>
+</div>

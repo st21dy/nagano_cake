@@ -1,0 +1,19 @@
+
+    <h4 class="text-center">ジャンルから探す</h4>
+    
+    <table class="table table-bordered table-hover text-center ec-genre-list" >
+      <tr>
+        <td>
+          <%= link_to "全商品を表示", items_path, class:"ec-genre-list-item" %>
+        </td>
+      </tr>
+
+      <% genres.each do |genre| %>
+        <tr>
+          <td>
+            <%= link_to genre.name, admin_genre_path(genre.id), class:"ec-genre-list-item"%>
+          </td>
+        </tr>
+     
+      <% end %>
+    </table>

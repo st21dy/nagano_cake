@@ -1,0 +1,15 @@
+<% provide(:title, "管理者ログイン") %>
+
+<div class="container">
+<h2>管理者ログイン</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= render "layouts/error_messages", resource: resource %>
+  <%= render "session", f: f %>
+
+  <div class="actions col-xs-6">
+    <%= f.submit "　ログイン　", class: "btn btn-dark" %>
+  </div>
+<% end %>
+
+</div>

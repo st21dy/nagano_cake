@@ -1,0 +1,42 @@
+<% provide(:title, "ジャンル編集") %>
+
+<br><br>
+<center>
+
+  <div class="col-xs-10 col-xs-offset-1">
+    <h2>ジャンル編集</h2><br>
+
+    <div class="edit-genre-form">
+      
+    <% if @genre.errors.any? %>
+      <%= render "layouts/error_messages", resource: @genre %>
+    <% end %>
+          
+    <%= form_for @genre, :url => {:action => :update} do |f| %>
+          
+          <%= f.label :ジャンル %>
+          <%= f.text_field :name,class: "col-md-4" %>
+          
+          <%= f.radio_button :is_valid, true %>
+          <%= f.label :is_valid, "有効", {value: :true, style: "display: inline-block;"} %>
+          <%= f.radio_button :is_valid, false %>
+          <%= f.label :is_valid, "無効", {value: :false, style: "display: inline-block;"} %>
+          
+          <%= f.submit "変更を保存する", class: "btn btn-dark" %>
+         
+    <% end %>
+    </div>
+  </div>
+
+    
+<br>
+
+
+  <div class="col-xs-10 col-xs-offset-1">
+
+    <%= link_to "戻る", admin_genres_path, class: "btn btn-dark" %>
+    
+  </div>
+
+</center>
+<br><br>

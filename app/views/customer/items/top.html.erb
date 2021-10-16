@@ -1,0 +1,64 @@
+<% provide(:title, "ホーム") %>
+
+<link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet">
+
+<br><br>
+<center>
+<div id="carouselExampleIndicators" class="carousel carousel-fade slide" data-ride="carousel">
+
+  <!-- スライドさせる画像の設定 -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <%= image_tag 'cake1.jpg', class: 'd-block w-100' %>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag 'cake2.jpg', class: 'd-block w-100' %>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag 'cake3.jpg', class: 'd-block w-100' %>
+    </div>
+  </div><!-- /.carousel-inner -->
+
+  <!-- スライドコントロールの設定 -->
+  <!-- "<"のデザイン -->
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  </a>
+  <!-- ">"のデザイン -->
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  </a>
+</div><!-- /.carousel -->
+</center>
+
+<br><br><br>
+
+<div class="row">
+	
+		<div class="col-md-3">
+  		<!-- ジャンルのサイドバーを表示 -->
+  		<%= render "customer/items/sidebar", genres: @genres %>
+    </div>
+    
+    <div class="col-md-8 offset-md-1">
+    	<h4>
+				ようこそ、ながのCAKEへ！<br>
+			  このサイトは、ケーキ販売のECサイトになります。<br>
+			  会員でない方も商品の閲覧はできますが、購入には会員登録が必要になります。
+			</h4>
+			<br><br>
+			<h3 class="toppage-head">新着商品</h3>
+			<!-- ランダムに4つ表示されるようになっています -->
+			<div class="item-right">
+			<% @items.first(5). each do |item| %>
+			  <%= render "item_each", item: item %>
+			<% end %>
+			</div>
+			<div class="text-right">
+				<%= link_to "全ての商品を見る >", items_path, class: "btn-dark  pull-right" %>
+			</div>
+		</div>
+	
+</div>
+
+<br><br>

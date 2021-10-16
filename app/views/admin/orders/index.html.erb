@@ -1,0 +1,42 @@
+<% provide(:title, "注文履歴一覧") %>
+
+<br><br>
+<center>
+
+  <div class="col-xs-10 col-xs-offset-1">
+    <strong><h3>注文一覧</h3></strong>
+    <br>
+
+
+    <div class="order-table">
+      <table class="table">
+        <thead class="bg-light">
+          <tr>
+            <th class="text-center">購入日時</th>
+            <th class="text-center">購入者</th>
+            <th class="text-center">注文個数</th>
+            <th class="text-center">注文ステータス</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td class="text-center">
+              	<%= link_to admin_order_path(order), data: {"turbolinks" => false}, :style=>"color:#528fff;"  do %>
+									<%= order.created_at %>
+								<% end %>
+							</td>
+              <td class="text-center"><%= full_name(order.customer) %></td>
+              <td class="text-center"><%= order.order_details.count %></td>
+              <td class="text-center"><%= order.status %></td><!-- わからない -->
+            </tr>
+            <% end %>
+            <%= paginate @orders %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</center>
+<br><br>
